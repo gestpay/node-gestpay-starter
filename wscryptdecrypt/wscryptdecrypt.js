@@ -14,7 +14,7 @@ module.exports = class WsCryptDecrypt {
 
 	_init() {
 		return new Promise((resolve, reject) => {
-			
+
 			if (this.soapClient) resolve();
 
 			const options = {
@@ -22,7 +22,7 @@ module.exports = class WsCryptDecrypt {
 			}
 
 			soap.createClient(this.url, options, (err, client) => {
-			
+
 				if (err) throw reject(err);
 				this.soapClient = client;
 				resolve();
@@ -39,6 +39,17 @@ module.exports = class WsCryptDecrypt {
 				});
 			});
 		});
+	}
+
+	decrypt(decryptRequest) {
+		return this._init().then(() => {
+			return new Promise((resolve, reject) => {
+				this.soapClient.Decrypt(decryptRequest, (err, result) => {
+					if (err) reject(err);
+					resolve(result.DecryptResult.GestPayCryptDecrypt);
+				});
+			})
+		})
 	}
 
 }
