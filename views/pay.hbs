@@ -1,5 +1,4 @@
-<%@ page import="com.myshop.constants.Constants" %>
-<%@ page import="it.gestpay.wscryptdecrypt.EncryptResponse" %>
+<!DOCTYPE>
 <html>
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.2/css/bulma.min.css">
@@ -20,13 +19,13 @@
     </div>
 </section>
 <section class="section container">
-    <p>You have requested to buy <b><%= request.getParameter("item") %></b>.</p>
-    <p>The price is <b><%= request.getParameter("price") %>&euro;</b>.</p>
+    <p>You have requested to buy <b>{{item}}</b>.</p>
+    <p>The price is <b>{{amount}} &euro;</b>.</p>
     <br>
     <p>
     <form action="https://testecomm.sella.it/pagam/pagam.aspx" method="GET">
-        <input type="hidden" name="a" value="<%=Constants.SHOP_LOGIN%>">
-        <input type="hidden" name="b" value="<%=((EncryptResponse)request.getAttribute("encryptResponse")).getCryptDecryptString()%>">
+        <input type="hidden" name="a" value="{{ shopLogin }}">
+        <input type="hidden" name="b" value="{{ cryptedString }}">
         <input type="submit" value="Pay Now!" class="button">
     </form>
     </p>

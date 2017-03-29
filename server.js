@@ -2,7 +2,11 @@ const express = require('express');
 const hbs = require('hbs');
 const  bodyParser = require('body-parser');
 
+const properties = require('./properties');
+const GestpayService = require('./gestpay_service/GestpayService');
+
 const port = process.env.PORT || 3000 ;  
+const gestpayService = new GestpayService();
 
 const app = express();
 
@@ -21,13 +25,32 @@ app.get('/', (req, res) => {
 
 app.post('/pay', (req, res) => {
 	let item = req.body.item;
-	let price = req.body.price;
-	console.log(`received request for ${item} with price ${price}...`)
-	// TODO perform soap request ...
-	// TODO redirect encrypt variable to template ... 
+	let amount = req.body.price;
+	console.log(`received request for ${item} with price ${amount}...`)
+	gestpayService.encrypt({
+		item, 
+		amount
+	}).then((cryptedString) => {
+		res.render('pay.hbs', {
+			shopLogin: properties.shopLogin,
+			cryptedString, 
+			item,
+			amount
+		})
+	}).catch((err) => {
+		res.render('error.hbs', {
+			error: err
+		});
+	});
 });
 
-//TODO create response app
+app.get('/response', (req, res) => {
+	let shopLogin = req.params.a; 
+	let cryptedString = req.params.b; 
+	console.log(`received a GET /response ...`);
+
+	
+});
 
 app.use(express.static(__dirname+'/public'));
 
