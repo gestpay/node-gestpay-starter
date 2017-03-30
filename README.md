@@ -36,7 +36,7 @@ This example tries to be as simple as possible. Here is a list of npm packages u
 - `wscryptdecrypt/wscryptdectypt.js`: the low level file that will perform the soap calls to Gestpay. 
 - `properties.json`: a file with some global properties. 
 
-## A brief description of the user interaction 
+## A brief description of the user interaction
 
 - The main entry point is `/`, where the user can choose a product to pay. 
 - After clicking on _buy_ button, the server will ask Gestpay for an `encryptionString` and the user will redirect to `/pay`. 
