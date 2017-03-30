@@ -1,25 +1,26 @@
 {
-  "name": "node-gestpay-starter",
-  "version": "1.0.0",
-  "description": "A Gestpay Starter solution coded in NodeJS ",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "watch": "nodemon -e js,hbs server.js",
-    "test": "mocha ./**/*.test.js",
-		"test-watch": "nodemon --exec \"npm test\""
-  },
-  "author": "Michele Nasti",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.17.1",
-    "express": "^4.15.2",
-    "hbs": "^4.0.1",
-    "soap": "^0.19.0"
-  },
-  "devDependencies": {
-    "expect": "^1.20.2",
-    "mocha": "^3.2.0",
-    "supertest": "^3.0.0"
-  }
+	"name": "node-gestpay-starter",
+	"version": "1.0.0",
+	"description": "A Gestpay Starter solution coded in NodeJS ",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js",
+		"watch": "nodemon -e js,hbs server.js",
+		"test": "mocha ./**/*.test.js",
+		"test-watch": "nodemon --exec \"npm test\"",
+		"jsdoc": "jsdoc ./**/*.js"
+	},
+	"author": "Michele Nasti",
+	"license": "ISC",
+	"dependencies": {
+		"body-parser": "^1.17.1",
+		"express": "^4.15.2",
+		"hbs": "^4.0.1",
+		"soap": "^0.19.0"
+	},
+	"devDependencies": {
+		"expect": "^1.20.2",
+		"mocha": "^3.2.0",
+		"supertest": "^3.0.0"
+	}
 }

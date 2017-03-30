@@ -1,11 +1,20 @@
-const WsCryptDecrypt = require("../wscryptdecrypt/wscryptdecrypt");
-const properties = require("../properties");
+const WsCryptDecrypt = require('../wscryptdecrypt/wscryptdecrypt');
+const properties = require('../properties');
 
-module.exports = class GestpayService {
+/**
+ * This module takes the data coming from the pages and will call WsCryptEncrypt. 
+ */
+class GestpayService {
   constructor() {
     this.wsCryptDecrypt = new WsCryptDecrypt(properties.testEnv);
   }
 
+  /**
+ * Item to pay only needs to have an amount.
+ * @param {object} itemToPay
+ * @param {string} itemToPay.amount
+ * @returns {Promise<string>} the cryptDecryptString. 
+ */
   encrypt(itemToPay) {
     // build shopTransactionId
     let now = new Date();
@@ -15,7 +24,7 @@ module.exports = class GestpayService {
       this.wsCryptDecrypt
         .encrypt({
           shopLogin: properties.shopLogin,
-          uicCode: "242",
+          uicCode: '242',
           amount: itemToPay.amount,
           shopTransactionId
         })
@@ -28,6 +37,12 @@ module.exports = class GestpayService {
     });
   }
 
+  /**
+ * 
+ * @param {object} decryptRequest
+ * @param {string} decryptRequest.cryptedString
+ * @returns {Promise.<object>} a Promise with an object rapresentation of the transaction result.
+ */
   decrypt(decryptRequest) {
     return new Promise((resolve, reject) => {
       this.wsCryptDecrypt
@@ -39,4 +54,6 @@ module.exports = class GestpayService {
         .catch(reject);
     });
   }
-};
+}
+
+module.exports = GestpayService;
