@@ -33,8 +33,29 @@ describe('WsCryptEncrypt webservice', () => {
 	 * This test serves only to check that the connection with Gestpay is OK.
 	 * It's impossible to retrieve a Gestpay DecryptedString that's valid forever.
 	 */
-  it('should fail with wrong decrypt string', () => {
+  it('should decrypt the string (with a mock)', () => {
     let wsCryptDecryptClient = new WsCryptDecrypt(true);
+
+    // Here, I'm mocking the _init method. _init will create the object
+    // soapClient and will attach the method Decrypt.
+    // soapClient.Decrypt will return the result in a callback.
+    wsCryptDecryptClient._init = expect.createSpy().andCall(() => {
+      wsCryptDecryptClient.soapClient = {
+        Decrypt: function(param, callback) {
+          return callback(undefined, {
+            DecryptResult: {
+              GestPayCryptDecrypt: {
+                TransactionType: 'DECRYPT',
+                TransactionResult: 'OK',
+                ErrorCode: '0'
+              }
+            }
+          });
+        }
+      };
+      return Promise.resolve();
+    });
+
     return wsCryptDecryptClient
       .decrypt({
         shopLogin: properties.shopLogin,
@@ -43,8 +64,8 @@ describe('WsCryptEncrypt webservice', () => {
       .then(result => {
         expect(result).toBeA('object').toInclude({
           TransactionType: 'DECRYPT',
-          TransactionResult: 'KO',
-          ErrorCode: '1141'
+          TransactionResult: 'OK',
+          ErrorCode: '0'
         });
       });
   });

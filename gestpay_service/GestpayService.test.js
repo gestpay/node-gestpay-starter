@@ -16,7 +16,13 @@ describe('GestpayService', () => {
       });
   });
 
-  it('should fail to decipher a decryptString', () => {
+  it('should Decrypt the string (with a mock)', () => {
+    expect.spyOn(gestpayService, 'decrypt').andReturn(
+      Promise.resolve({
+        TransactionType: 'DECRYPT'
+      })
+    );
+
     return gestpayService
       .decrypt({
         cryptedString: 'abcdefghijklmno'
@@ -26,5 +32,7 @@ describe('GestpayService', () => {
           TransactionType: 'DECRYPT'
         });
       });
+
+    gestpayService.decrypt.restore();
   });
 });
