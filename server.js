@@ -4,9 +4,14 @@ const bodyParser = require('body-parser');
 
 const properties = require('./properties');
 const GestpayService = require('./gestpay_service/GestpayService');
+const externalIp = require('./external-ip/external-ip');
 
 // This is the service we will use to talk with Gestpay
 const gestpayService = new GestpayService();
+
+externalIp.getIp().then(ip => {
+  console.log(`The server's ip is ${ip}`);
+});
 
 //instantiation of express app
 const app = express();

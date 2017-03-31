@@ -15,7 +15,7 @@
 				"--timeout",
 				"999999",
 				"--colors",
-				"${workspaceRoot}/wscryptdecrypt/wscryptdecrypt.test.js"
+				"${workspaceRoot}/external-ip/external-ip.test.js"
 			],
 			"internalConsoleOptions": "openOnSessionStart"
 		},
