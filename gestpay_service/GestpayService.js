@@ -29,9 +29,14 @@ class GestpayService {
           shopTransactionId
         })
         .then(encryptResponse => {
+          console.log(JSON.stringify(encryptResponse, null, 2));
+          if (encryptResponse.TransactionResult === 'KO') {
+            reject(encryptResponse);
+          }
           resolve(encryptResponse.CryptDecryptString);
         })
         .catch(err => {
+          console.err(`Error in Encrypt: ${err}`);
           reject(err);
         });
     });

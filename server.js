@@ -50,6 +50,7 @@ app.post('/pay', (req, res) => {
       amount
     })
     .then(cryptedString => {
+      console.log('cryptedString: ' + JSON.stringify(cryptedString, null, 2));
       res.render('pay.hbs', {
         shopLogin: properties.shopLogin,
         cryptedString,
@@ -59,7 +60,7 @@ app.post('/pay', (req, res) => {
     })
     .catch(err => {
       res.render('error.hbs', {
-        error: err
+        error: JSON.stringify(err, null, 2)
       });
     });
 });
@@ -82,7 +83,11 @@ app.get('/response', (req, res) => {
     })
     .then(result => {
       console.log(result);
-      res.render('response.hbs', result);
+      resultJson = JSON.stringify(result, null, 2);
+      res.render('response.hbs', {
+        result,
+        resultJson
+      });
     })
     .catch(err => {
       res.render('error.hbs', {
@@ -94,7 +99,6 @@ app.get('/response', (req, res) => {
 /**
  * Everything that is in "/public" will be served as is. 
  */
-app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/public'));
 
 /**
