@@ -26,7 +26,9 @@ app.set('view engine', 'hbs');
 //configuration of middlewares.
 //We use these to read POST parameters.
 app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(bodyParser.urlencoded({
+  extended: true
+})); // support encoded bodies
 
 /**
  * This is the default route. It will render the homepage.
@@ -44,18 +46,21 @@ app.post('/pay', (req, res) => {
   let item = req.body.item;
   let amount = req.body.price;
   console.log(`received request for ${item} with price ${amount}...`);
-  gestpayService
-    .encrypt({
+  let testEnv = properties.testEnv || true;
+  let url = properties.testEnv ? 'https://sandbox.gestpay.net/pagam/pagam.aspx' : 'https://ecomm.sella.it/pagam/pagam.aspx'
+  gestpayService.encrypt({
       item,
       amount
     })
     .then(cryptedString => {
       console.log('cryptedString: ' + JSON.stringify(cryptedString, null, 2));
+
       res.render('pay.hbs', {
         shopLogin: properties.shopLogin,
         cryptedString,
         item,
-        amount
+        amount,
+        url
       });
     })
     .catch(err => {
