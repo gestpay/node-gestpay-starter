@@ -12,7 +12,7 @@ In this project you'll see an example e-commerce that will pay through Gestpay S
 - install the dependencies: `npm install`
 - open file `properties.json` and set your `shopLogin`
 - launch ngrok with `./ngrok http 3000`, where `3000` is the port configured in `properties.json`.It will return an address like `http://44bda365.ngrok.io` 
-- Go in [Merchant Back Office](https://testecomm.sella.it/BackOffice) and, in _Configuration_, configure your server address: for example `http://44bda365.ngrok.io/response` in *URL for positive response*, *URL for negative response*. 
+- Go in [Merchant Back Office](https://sandbox.gestpay.net/BackOffice) and, in _Configuration_, configure your server address: for example `http://44bda365.ngrok.io/response` in *URL for positive response*, *URL for negative response*. 
 - launch the app with `npm start`
 
 ## Under the hood 

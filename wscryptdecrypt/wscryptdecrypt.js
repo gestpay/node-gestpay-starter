@@ -8,7 +8,7 @@ class WsCryptDecrypt {
 
   constructor(isTest) {
     this.url = 'https://ecommS2S.sella.it/gestpay/GestPayWS/WsCryptDecrypt.asmx?wsdl';
-    let testUrl = 'https://testecomm.sella.it/gestpay/GestPayWS/WsCryptDecrypt.asmx?wsdl';
+    let testUrl = 'https://sandbox.gestpay.net/gestpay/GestPayWS/WsCryptDecrypt.asmx?wsdl';
 
     if (isTest) {
       this.url = testUrl;
