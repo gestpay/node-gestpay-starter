@@ -1,0 +1,33 @@
+<!DOCTYPE>
+<html>
+
+{{> header }}
+
+<body>
+	{{> banner }}
+	<section class="section container">
+		<div class="columns">
+			<div class="column">
+				<p>Your item has been payed!</p>
+				<p>Here is a recap of the transaction:</p>
+				<p>ErrorCode: <b>{{result.ErrorCode}}</b></p>
+				<p>ErrorDescription: <b>{{result.ErrorDescription}}</b></p>
+				<p>Amount: <b>{{result.Amount}}</b></p>
+				<p>Authorization Code: <b>{{result.AuthorizationCode}}</b></p>
+				<p>Bank Transaction Id: <b>{{result.BankTransactionID}}</b></p>
+				<p>Currency: <b>{{result.Currency}}</b></p>
+				<p>ShopTransactionId: <b>{{result.ShopTransactionID}}</b></p>
+				<p>Transaction Result: <b>{{result.TransactionResult}}</b></p>
+				<p>Transaction Type: <b>{{result.TransactionType}}</b></p>
+				<p>More data is available, check the logs.</p>
+				<a href="/" class="button is-primary">Home</a>
+			</div>
+			<div class="column">
+				Here is the response in JSON (NOTE: it was XML):
+				<pre><code>{{resultJson}}</code></pre>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>

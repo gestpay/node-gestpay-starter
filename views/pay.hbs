@@ -1,0 +1,23 @@
+<!DOCTYPE>
+<html>
+
+{{> header }}
+
+<body>
+	{{> banner }}
+
+	<section class="section container">
+		<p>You have requested to buy <b>{{item}}</b>.</p>
+		<p>The price is <b>{{amount}} &euro;</b>.</p>
+		<br>
+		<p>
+			<form action="{{ url }}" method="GET">
+				<input type="hidden" name="a" value="{{ shopLogin }}">
+				<input type="hidden" name="b" value="{{ cryptedString }}">
+				<input type="submit" value="Pay Now!" class="button">
+			</form>
+		</p>
+	</section>
+</body>
+
+</html>
