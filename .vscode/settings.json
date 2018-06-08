@@ -1,0 +1,8 @@
+// Inserire le impostazioni in questo file per sovrascrivere quelle utente e predefinite.
+{
+	"files.associations": {
+        // extension name : html
+        "*.html": "html",
+        "*.hbs": "html"
+    }
+}
